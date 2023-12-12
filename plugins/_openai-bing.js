@@ -9,7 +9,7 @@ let handler = async (m, {
   if (command == 'bing') {
     if (!text) throw `Example : ${usedPrefix + command} siapa presiden Indonesia?`;
     try {
-    m.reply(wait)
+      m.reply(wait)
       let response = await fetch('https://api.botcahx.live/api/search/bing-chat', {
           method: 'POST',
           headers: {
@@ -31,7 +31,7 @@ let handler = async (m, {
   if (command == 'bingimg') {
     if (!text) throw `Contoh: ${usedPrefix + command} anak berlari menggunakan pakaian merah 3d animation`;
     try {
-    m.reply(wait)
+      m.reply(wait)
       let response = await fetch('https://api.botcahx.live/api/search/bing-img', {
           method: 'POST',
           headers: {
@@ -44,7 +44,8 @@ let handler = async (m, {
         })
         .then(res => res.json());
 
-      for (let img of response.result) {
+      for (let i = 0; i < 4; i++) {
+        let img = response.result[i]
         await sleep(3000)
         await conn.sendFile(m.chat, img, 'bing_img.png', `*PROMPT:* ${text}`, m)
       }
